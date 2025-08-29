@@ -1,4 +1,16 @@
 function love.load()
+  anim8 = require "libraries/anim8/anim8"
+
+  sprites = {}
+  sprites.playerSheet = love.graphics.newImage("sprites/playerSheet.png")
+
+  local grid = anim8.newGrid(614, 564, sprites.playerSheet:getWidth(), sprites.playerSheet:getHeight())
+
+  animations = {}
+  animations.idle = anim8.newAnimation(grid("1-15", 1), 0.05)
+  animations.jump = anim8.newAnimation(grid("1-7", 2), 0.05)
+  animations.run = anim8.newAnimation(grid("1-15", 3),0.05)
+
   wf = require "libraries/windfield/windfield" -- Windfield lib
   world = wf.newWorld(0, 800, false) -- Creating a "world" with gravity
   world:setQueryDebugDrawing(true)
@@ -11,6 +23,7 @@ function love.load()
   player = world:newRectangleCollider(360, 100, 80, 80, {collision_class = "Player"}) -- Collider = physics object
   player:setFixedRotation(true)
   player.speed = 240
+  player.animation = animations.jump
 
   platform = world:newRectangleCollider(250, 400, 300, 100, {collision_class = "Platform"})
   platform:setType("static")
@@ -36,10 +49,13 @@ function love.update(dt)
       player:destroy()
     end
   end
+
+ player.animation:update(dt)
 end
 
 function love.draw()
   world:draw()
+  player.animation:draw(sprites.playerSheet, 0, 0)
 end
 
 function love.keypressed(key)
