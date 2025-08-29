@@ -24,12 +24,11 @@ function love.load()
   world:addCollisionClass("Danger")
 
   require("player")
- 
-  platform = world:newRectangleCollider(250, 400, 300, 100, {collision_class = "Platform"})
-  platform:setType("static")
 
-  dangerZone = world:newRectangleCollider(0, 550, 800, 50, {collision_class = "Danger"})
-  dangerZone:setType("static")
+  -- dangerZone = world:newRectangleCollider(0, 550, 800, 50, {collision_class = "Danger"})
+  -- dangerZone:setType("static")
+
+  platforms = {}
 
   loadMap()
 end
@@ -63,6 +62,17 @@ function love.mousepressed(x,y, button)
   end
 end
 
-function loadMap()
+function spawnPlatform(x, y, width, height)
+  if width > 0 and height > 0 then
+    local platform = world:newRectangleCollider(x, y, width, height, {collision_class = "Platform"})
+    platform:setType("static")
+    table.insert(platforms, platform)
+  end
+end
+
+function loadMap(mapName)
   gameMap = sti("maps/level1.lua")
+  for i, obj in pairs(gameMap.layers["Platforms"].objects) do
+    spawnPlatform(obj.x, obj.y, obj.width, obj.height)
+  end
 end
