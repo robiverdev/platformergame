@@ -26,6 +26,7 @@ function love.load()
   player.animation = animations.idle
   player.isMoving = false
   player.direction = 1 -- 1 right, -1 left
+  player.grounded = true
 
   platform = world:newRectangleCollider(250, 400, 300, 100, {collision_class = "Platform"})
   platform:setType("static")
@@ -38,6 +39,14 @@ function love.update(dt)
   world:update(dt)
 
   if player.body then
+    local colliders = world:queryRectangleArea(player:getX() - 20, player:getY() + 50, 40, 2, {"Platform"})
+
+    if #colliders > 0 then 
+      player.grounded = true
+    else 
+      player.grounded = false
+    end
+
     player.isMoving = false
     local  px, py = player:getPosition()
     if love.keyboard.isDown("right") then
@@ -57,11 +66,16 @@ function love.update(dt)
     end
   end
 
-  if player.isMoving then
-    player.animation = animations.run
-  else 
-    player.animation = animations.idle
+  if player.grounded then
+    if player.isMoving then
+      player.animation = animations.run
+    else 
+      player.animation = animations.idle
+    end
+  else
+    player.animation = animations.jump
   end
+
   player.animation:update(dt)
 end
 
@@ -74,8 +88,7 @@ end
 
 function love.keypressed(key)
   if key == "up" then
-    local colliders = world:queryRectangleArea(player:getX() - 20, player:getY() + 50, 40, 2, {"Platform"})
-    if #colliders > 0 then
+    if player.grounded then
       player:applyLinearImpulse(0, -4000)
     end
   end
