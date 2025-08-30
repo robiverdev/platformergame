@@ -1,6 +1,6 @@
-# Lua Platformer with LÖVE & Windfield
+# Lua Platformer with LÖVE & Windfield and other libraries
 
-This is a simple platformer prototype built using the [LÖVE framework](https://love2d.org/) and the [Windfield physics library](https://github.com/a327ex/windfield).  
+This is a platformer game using the [LÖVE framework](https://love2d.org/) and the [Windfield physics library](https://github.com/a327ex/windfield) along side others listed in the "Requirements" section.  
 It demonstrates basic physics with gravity, a player collider, and a static platform.
 
 ---
@@ -18,6 +18,9 @@ It demonstrates basic physics with gravity, a player collider, and a static plat
 
 - [LÖVE 11.x](https://love2d.org/)
 - [Windfield](https://github.com/adnzzzzZ/windfield) physics library
+- [Anim8](https://github.com/kikito/anim8) animations
+- [HUMP](https://github.com/vrld/hump) tools for LÖVE game development
+- [STI](https://github.com/karai17/Simple-Tiled-Implementation) Tiled map loader and renderer for LÖVE
 
 ---
 
@@ -25,7 +28,7 @@ It demonstrates basic physics with gravity, a player collider, and a static plat
 
 1. Clone or download this repository.
 2. Install LÖVE (if you don’t have it).
-3. Place the Windfield library inside a `libraries/` folder in your project directory (as shown in the code).
+3. Place all additional libraries inside a `libraries/` folder in your project directory (as shown in the code).
 
 ---
 
