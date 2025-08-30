@@ -16,10 +16,11 @@ It demonstrates basic physics with gravity, a player collider, and a static plat
 
 ## Requirements
 
-- [LÖVE 11.x](https://love2d.org/)
+- [LÖVE](https://love2d.org/)
 - [Windfield](https://github.com/adnzzzzZ/windfield) physics library
 - [Anim8](https://github.com/kikito/anim8) animations
 - [HUMP](https://github.com/vrld/hump) tools for LÖVE game development
+- [Tiled](https://www.mapeditor.org/) Flexible level editor
 - [STI](https://github.com/karai17/Simple-Tiled-Implementation) Tiled map loader and renderer for LÖVE
 
 ---
